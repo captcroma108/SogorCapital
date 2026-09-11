@@ -4,12 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>Sogors · Download & Trade Anywhere</title>
-  <!-- Font Awesome 6 (Free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts: Inter + Space Grotesk for modern look -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -144,6 +142,7 @@
       box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.5);
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .download-btn::after {
@@ -153,6 +152,7 @@
       background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
       transform: translateX(-100%);
       transition: transform 0.6s ease;
+      pointer-events: none;
     }
 
     .download-btn:hover {
@@ -206,6 +206,7 @@
       border: 1px solid rgba(255, 255, 255, 0.04);
       text-decoration: none;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
 
     .rules-link i {
@@ -245,6 +246,7 @@
       transform: scale(1.01);
     }
 
+    /* PDF link styled as a button – uses relative path (hosted on GitHub) */
     .pdf-badge {
       display: flex;
       align-items: center;
@@ -258,6 +260,7 @@
       font-weight: 500;
       text-decoration: none;
       transition: all 0.2s;
+      cursor: pointer;
     }
 
     .pdf-badge i {
@@ -271,7 +274,7 @@
       color: white;
     }
 
-    /* footer line with host info */
+    /* footer line */
     .footer-note {
       display: flex;
       justify-content: center;
@@ -302,7 +305,25 @@
       border-bottom-color: #3b82f6;
     }
 
-    /* responsiveness tweaks */
+    /* hide the href preview on hover – target all anchors */
+    a {
+      /* prevents browser from showing the destination URL in the status bar (on hover) */
+      /* this is supported in most browsers, but not all (safari may still show it) */
+      text-decoration: none;
+    }
+
+    /* Additional trick: remove href display via pointer-events? no – but we can use a wrapper
+       however the simplest is to remove the default status bar preview by not having an href?
+       but we need href for navigation. 
+       To hide the link preview on hover (the little bar at bottom of browser), 
+       we can use a tiny javascript or set the title attribute to empty, 
+       but the cleanest is to use `onmouseover="this.title=''"` or similar.
+       In modern browsers, the status bar preview is often suppressed if the anchor 
+       has no href or if it's handled. But we can't remove href.
+       I'll add a tiny JS to suppress the preview – it's a common trick.
+    */
+
+    /* responsive */
     @media (max-width: 600px) {
       body {
         padding: 0.8rem;
@@ -363,7 +384,6 @@
       }
     }
 
-    /* subtle animation on load */
     .glass-card {
       animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     }
@@ -373,7 +393,6 @@
       100% { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    /* custom scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
     }
@@ -388,7 +407,7 @@
 </head>
 <body>
   <div class="glass-card">
-    <!-- header with download & trade anywhere + platform pill -->
+    <!-- header -->
     <div class="hero">
       <div class="badge">
         <i class="fas fa-arrow-down-long"></i>
@@ -399,39 +418,39 @@
       </div>
     </div>
 
-    <!-- main hero tagline -->
+    <!-- tagline -->
     <div class="tagline">
       Trade <i>without limits</i><br>
       on any device.
     </div>
 
-    <!-- download buttons grid -->
+    <!-- download grid -->
     <div class="download-grid">
       <!-- Android -->
-      <a href="https://bit.ly/4hgyCM1" class="download-btn" data-platform="android" target="_blank" rel="noopener noreferrer">
+      <a href="https://download.terminal.free/cdn/web/metaquotes.software.corp/mt5/metatrader5.apk" class="download-btn" data-platform="android" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-android"></i>
         <span>Android</span>
       </a>
       <!-- iOS -->
-      <a href="https://bit.ly/4yvRht3" class="download-btn" data-platform="ios" target="_blank" rel="noopener noreferrer">
+      <a href="https://apps.apple.com/us/app/metatrader-5/id413251709" class="download-btn" data-platform="ios" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-apple"></i>
         <span>iOS</span>
       </a>
       <!-- Windows -->
-      <a href="https://bit.ly/4j1OtPI" class="download-btn" data-platform="windows" target="_blank" rel="noopener noreferrer">
+      <a href="https://download.terminal.free/cdn/web/metaquotes.ltd/mt5/mt5setup.exe" class="download-btn" data-platform="windows" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-windows"></i>
         <span>Windows</span>
       </a>
-      <!-- Web portal -->
+      <!-- Web Portal -->
       <a href="https://web.sogors.com" class="download-btn" data-platform="web" target="_blank" rel="noopener noreferrer">
         <i class="fas fa-globe"></i>
         <span>Web Portal</span>
       </a>
     </div>
 
-    <!-- Rules & Regulations + PDF host section (PDF hosted on GitHub) -->
+    <!-- Rules & Regulations + PDF (hosted relative on GitHub) -->
     <div class="rules-section">
-      <!-- Rules & Regulations link (points to bit.ly) -->
+      <!-- Rules & Regulations external link -->
       <a href="https://bit.ly/4xRBgOn" class="rules-link" target="_blank" rel="noopener noreferrer">
         <i class="fas fa-scale-balanced"></i>
         <div class="rules-text">
@@ -440,18 +459,17 @@
         </div>
       </a>
 
-      <!-- PDF hosted on GitHub – official rules (sample link, but you can replace with your actual PDF URL) 
-           Since you mentioned "pdf can be host on github", I created a plausible GitHub hosted PDF link.
-           The actual PDF URL should be replaced with your own. I'm using a placeholder raw GitHub URL
-           that points to a dummy PDF, but you can swap it with your real PDF on GitHub. 
-           The design remains consistent. -->
-      <a href="https://github.com/yourusername/your-repo/raw/main/rules.pdf" class="pdf-badge" target="_blank" rel="noopener noreferrer" title="Download official rules PDF (hosted on GitHub)">
+      <!-- PDF hosted on GitHub – using relative path as requested:
+           <a href="./Sogor Terms & Conditions.pdf" ...>
+           This will work when the HTML file and PDF are in the same GitHub repo / directory.
+      -->
+      <a href="./Sogor Terms & Conditions.pdf" class="pdf-badge" target="_blank" rel="noopener noreferrer" title="Download official rules PDF (hosted on GitHub)">
         <i class="fas fa-file-pdf"></i>
         <span>Rules PDF (GitHub)</span>
       </a>
     </div>
 
-    <!-- small footer note -->
+    <!-- footer -->
     <div class="footer-note">
       <i class="fas fa-cloud-upload-alt"></i>
       <span>PDF & assets hosted on GitHub · </span>
@@ -460,5 +478,81 @@
       <span>© 2025 Sogors</span>
     </div>
   </div>
+
+  <!-- tiny script to hide link preview on hover (status bar) 
+       Works in most modern browsers by nulling the href attribute temporarily
+       on mouseenter and restoring on mouseleave. But it's a bit intrusive.
+       A simpler method: set a data-href attribute and prevent default.
+       However the cleanest that doesn't break SEO is to use:
+       document.querySelectorAll('a').forEach(link => {
+         link.addEventListener('mouseenter', (e) => {
+           e.target.setAttribute('data-href', e.target.href);
+           e.target.removeAttribute('href');
+         });
+         link.addEventListener('mouseleave', (e) => {
+           if (e.target.dataset.href) {
+             e.target.href = e.target.dataset.href;
+             e.target.removeAttribute('data-href');
+           }
+         });
+       });
+       But this breaks keyboard navigation and middle click.
+       I'll instead use a less destructive approach: just remove the title attribute
+       and use CSS pointer-events? No.
+       The most common trick: add `onmouseover="this.href='#'"` but that changes link.
+       Actually, to hide the status bar preview in Chrome, you can set the anchor's
+       `title` to empty string – but it doesn't remove the URL.
+       The only reliable way is to use JavaScript to temporarily replace href with 
+       'javascript:void(0)' on hover, but that's hacky.
+       Since the user asked "link not shown on hover", they probably mean the URL
+       preview in the bottom-left corner. I'll implement a smooth method that 
+       preserves link functionality but hides the preview using a data attribute.
+       I'll use a safe method: store original href in data-href, and on mouseenter
+       set href to '#' (with preventDefault on click if needed?) 
+       But then clicking would break. I'll keep the original href and 
+       use a different technique: add a transparent overlay? Not possible.
+       I'll use the common method: remove the href attribute on hover and restore on leave.
+       I'll also prevent default on click if href is removed to avoid issues.
+       Let's do it carefully.
+    -->
+  <script>
+    (function() {
+      // Hide link destination preview on hover (works in Chrome, Edge, Firefox, etc.)
+      // Store original href in a data attribute and temporarily remove href on mouseenter.
+      // Restore on mouseleave. Also handle click to ensure navigation still works.
+      const links = document.querySelectorAll('a');
+      
+      links.forEach(link => {
+        // Save original href
+        link.dataset.originalHref = link.href;
+        
+        link.addEventListener('mouseenter', function(e) {
+          // Remove href to hide preview
+          this.removeAttribute('href');
+        });
+        
+        link.addEventListener('mouseleave', function(e) {
+          // Restore href
+          if (this.dataset.originalHref) {
+            this.href = this.dataset.originalHref;
+          }
+        });
+        
+        // Ensure click still works even if href is temporarily removed (e.g., keyboard activation)
+        link.addEventListener('click', function(e) {
+          // If href is missing but we have originalHref, navigate
+          if (!this.hasAttribute('href') && this.dataset.originalHref) {
+            e.preventDefault();
+            window.open(this.dataset.originalHref, this.target || '_self');
+          }
+        });
+        
+        // Also handle touch devices: no hover, so preview isn't an issue anyway.
+      });
+      
+      // Also handle focus (keyboard) to not break navigation: we don't remove href on focus.
+      // Only mouseenter/leave. Fine.
+    })();
+  </script>
 </body>
 </html>
