@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Sogors · Download & Trade Anywhere</title>
+  <!-- Font Awesome 6 (Free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Inter + Space Grotesk for modern look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0b0d10;
+      background-image: radial-gradient(circle at 25% 0%, #1a1f2a 0%, #0b0d10 70%);
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      color: #eef2f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .glass-card {
+      max-width: 1000px;
+      width: 100%;
+      background: rgba(18, 22, 28, 0.75);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 3rem;
+      box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+      padding: 2rem 2rem 2.5rem;
+      transition: all 0.3s ease;
+    }
+
+    /* header section */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      gap: 0.8rem 1.5rem;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: white;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    }
+
+    .badge i {
+      font-size: 2.2rem;
+      color: #3b82f6;
+      filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+    }
+
+    .badge span {
+      background: linear-gradient(135deg, #ffffff, #b9c8e0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 100px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #a0b3cc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(4px);
+    }
+
+    .pill i {
+      color: #4ade80;
+      font-size: 0.9rem;
+    }
+
+    /* main tagline */
+    .tagline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 8vw, 2.8rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+      color: #fff;
+      text-wrap: balance;
+    }
+
+    .tagline i {
+      color: #3b82f6;
+      font-style: normal;
+      background: linear-gradient(135deg, #3b82f6, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    /* download grid */
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.85rem;
+      margin: 2rem 0 2.5rem;
+    }
+
+    .download-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(30, 35, 45, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 2rem;
+      padding: 1rem 1.3rem;
+      text-decoration: none;
+      color: #eef2f6;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .download-btn:hover {
+      background: rgba(45, 55, 72, 0.8);
+      border-color: rgba(59, 130, 246, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 18px 28px -12px #1e293b, 0 0 0 1px rgba(59, 130, 246, 0.3);
+    }
+
+    .download-btn:hover::after {
+      transform: translateX(100%);
+    }
+
+    .download-btn i {
+      font-size: 1.7rem;
+      width: 2rem;
+      text-align: center;
+      color: #3b82f6;
+      transition: color 0.2s;
+    }
+
+    .download-btn:hover i {
+      color: #60a5fa;
+    }
+
+    /* specific icon colors for recognizability */
+    .download-btn[data-platform="android"] i { color: #3ddc84; }
+    .download-btn[data-platform="ios"] i { color: #eef2f6; }
+    .download-btn[data-platform="windows"] i { color: #00a4ef; }
+    .download-btn[data-platform="web"] i { color: #a855f7; }
+
+    /* rules & pdf section */
+    .rules-section {
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.2rem;
+    }
+
+    .rules-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 3rem;
+      padding: 0.7rem 1.5rem 0.7rem 1.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .rules-link i {
+      font-size: 2rem;
+      color: #facc15;
+      filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.4));
+    }
+
+    .rules-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .rules-text .label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+
+    .rules-text .title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: white;
+      line-height: 1.2;
+      transition: color 0.2s;
+    }
+
+    .rules-link:hover .title {
+      color: #facc15;
+    }
+
+    .rules-link:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(250, 204, 21, 0.3);
+      transform: scale(1.01);
+    }
+
+    .pdf-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 3rem;
+      padding: 0.65rem 1.5rem;
+      color: #93c5fd;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .pdf-badge i {
+      font-size: 1.2rem;
+      color: #3b82f6;
+    }
+
+    .pdf-badge:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: #3b82f6;
+      color: white;
+    }
+
+    /* footer line with host info */
+    .footer-note {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2.3rem;
+      font-size: 0.8rem;
+      color: #5f6c80;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.03);
+      padding-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-note i {
+      color: #3b82f6;
+      font-size: 0.8rem;
+    }
+
+    .footer-note a {
+      color: #8d9eb5;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(255,255,255,0.15);
+    }
+
+    .footer-note a:hover {
+      color: white;
+      border-bottom-color: #3b82f6;
+    }
+
+    /* responsiveness tweaks */
+    @media (max-width: 600px) {
+      body {
+        padding: 0.8rem;
+      }
+
+      .glass-card {
+        padding: 1.5rem 1.2rem;
+        border-radius: 2rem;
+      }
+
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .badge {
+        font-size: 1.3rem;
+      }
+
+      .badge i {
+        font-size: 1.9rem;
+      }
+
+      .download-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+      }
+
+      .download-btn {
+        padding: 0.9rem 1rem;
+        font-size: 0.9rem;
+        gap: 0.6rem;
+      }
+
+      .download-btn i {
+        font-size: 1.4rem;
+        width: 1.6rem;
+      }
+
+      .rules-section {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .rules-link {
+        padding: 0.7rem 1.2rem;
+      }
+
+      .pdf-badge {
+        justify-content: center;
+        padding: 0.7rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .download-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* subtle animation on load */
+    .glass-card {
+      animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.98) translateY(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0d10;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2d3748;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="glass-card">
+    <!-- header with download & trade anywhere + platform pill -->
+    <div class="hero">
+      <div class="badge">
+        <i class="fas fa-arrow-down-long"></i>
+        <span>DOWNLOAD & TRADE ANYWHERE</span>
+      </div>
+      <div class="pill">
+        <i class="fas fa-circle-check"></i> All platforms
+      </div>
+    </div>
+
+    <!-- main hero tagline -->
+    <div class="tagline">
+      Trade <i>without limits</i><br>
+      on any device.
+    </div>
+
+    <!-- download buttons grid -->
+    <div class="download-grid">
+      <!-- Android -->
+      <a href="https://bit.ly/4hgyCM1" class="download-btn" data-platform="android" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-android"></i>
+        <span>Android</span>
+      </a>
+      <!-- iOS -->
+      <a href="https://bit.ly/4yvRht3" class="download-btn" data-platform="ios" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-apple"></i>
+        <span>iOS</span>
+      </a>
+      <!-- Windows -->
+      <a href="https://bit.ly/4j1OtPI" class="download-btn" data-platform="windows" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-windows"></i>
+        <span>Windows</span>
+      </a>
+      <!-- Web portal -->
+      <a href="https://web.sogors.com" class="download-btn" data-platform="web" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-globe"></i>
+        <span>Web Portal</span>
+      </a>
+    </div>
+
+    <!-- Rules & Regulations + PDF host section (PDF hosted on GitHub) -->
+    <div class="rules-section">
+      <!-- Rules & Regulations link (points to bit.ly) -->
+      <a href="https://bit.ly/4xRBgOn" class="rules-link" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-scale-balanced"></i>
+        <div class="rules-text">
+          <span class="label">📜 Terms</span>
+          <span class="title">Rules & Regulations</span>
+        </div>
+      </a>
+
+      <!-- PDF hosted on GitHub – official rules (sample link, but you can replace with your actual PDF URL) 
+           Since you mentioned "pdf can be host on github", I created a plausible GitHub hosted PDF link.
+           The actual PDF URL should be replaced with your own. I'm using a placeholder raw GitHub URL
+           that points to a dummy PDF, but you can swap it with your real PDF on GitHub. 
+           The design remains consistent. -->
+      <a href="https://github.com/yourusername/your-repo/raw/main/rules.pdf" class="pdf-badge" target="_blank" rel="noopener noreferrer" title="Download official rules PDF (hosted on GitHub)">
+        <i class="fas fa-file-pdf"></i>
+        <span>Rules PDF (GitHub)</span>
+      </a>
+    </div>
+
+    <!-- small footer note -->
+    <div class="footer-note">
+      <i class="fas fa-cloud-upload-alt"></i>
+      <span>PDF & assets hosted on GitHub · </span>
+      <a href="https://github.com/" target="_blank" rel="noopener noreferrer">github.com</a>
+      <span style="margin-left: 0.3rem;">|</span>
+      <span>© 2025 Sogors</span>
+    </div>
+  </div>
+</body>
+</html>
